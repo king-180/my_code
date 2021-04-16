@@ -19,6 +19,7 @@
         <module>juc_demo</module>
         <module>jvm_demo</module>
         <module>mybatis_demo</module>
+        <module>mybatis_plus_demo</module>
         <module>redis_demo</module>
         <module>spring_demo</module>
         <module>netty_demo</module>
