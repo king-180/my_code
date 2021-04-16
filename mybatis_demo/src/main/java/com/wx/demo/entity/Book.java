@@ -1,15 +1,27 @@
 package com.wx.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.wx.demo.validator.anno.JsonFormatCheck;
+import com.wx.demo.validator.anno.group.AddGroup;
+import com.wx.demo.validator.anno.group.UpdateGroup;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Book implements Serializable{
+public class Book implements Serializable {
+
+    @Null(message = "新增不能带id", groups = {AddGroup.class})
+    @NotNull(message = "更新必须带id", groups = {UpdateGroup.class})
     private Integer id;
 
     private String mainType;
 
     private String subType;
 
+    @NotBlank(message = "新增或者更新必须带书名", groups = {AddGroup.class, UpdateGroup.class})
     private String bname;
 
     private String isbn;
@@ -36,8 +48,10 @@ public class Book implements Serializable{
 
     private String recBook;
 
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date bdate;
 
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date pubDate;
 
     public Integer getId() {

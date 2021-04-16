@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wx.demo.dao.BookDao">
+    <resultMap id="baseResultMap" type="com.wx.demo.entity.Book">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="bname" property="bname" jdbcType="STRING"/>
+        <result column="bdate" property="bdate" jdbcType="DATE"/>
+        <result column="author" property="author" jdbcType="STRING"/>
+        <result column="detail" property="detail" jdbcType="STRING"/>
+        <result column="mainType" property="mainType" jdbcType="STRING"/>
+    </resultMap>
+
+    <select id="list" resultMap="baseResultMap" parameterType="com.wx.demo.entity.Book">
+        select *
+        from book
+        where id = #{id}
+    </select>
+
+</mapper>
