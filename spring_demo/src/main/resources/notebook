@@ -1,0 +1,76 @@
+1. spring-aop 通知：
+spring4:
+    try {
+        @Around
+        @Before
+        method.invoke(obj, args);
+        @Around
+        @After
+        @AfterReturning
+    } catch(){
+        @AfterThrowing
+    } finally {
+        @After
+    }
+
+正常通知：Around环绕通知之前 --> Before前置通知 --> 被增强方法调用 --> Around环绕通知之后 --> After后置通知 --> AfterReturning返回后通知
+异常通知：Around环绕通知之前 --> Before前置通知 --> After后置通知 --> AfterThrowing异常通知
+ 
+spring5:
+    try {
+        @Around
+        @Before
+        method.invoke(obj, args);
+        @AfterReturning
+        @After
+        @Around
+    } catch(){
+        @AfterThrowing
+    } finally {
+        @After
+    }
+
+正常通知：Around环绕通知之前 --> Before前置通知 --> 被增强方法调用 --> AfterReturning返回后通知 --> After后置通知 --> Around环绕通知之后
+异常通知：Around环绕通知之前 --> Before前置通知 --> AfterThrowing异常通知 --> After后置通知
+
+
+spring 的版本：5.2.3.RELEASE springboot 的版本：2.2.4.RELEASE
+
+--------> @Around 环绕通知之前...
+--------> @Before 前置通知...
+        -------> CalcServiceImpl 被调用了... 结果：2
+--------> @Around 环绕通知之后...
+--------> @After 后置通知...
+--------> @AfterReturning 返回后通知...
+
+2.spring-ioc循环依赖：
+现象：org.springframework.beans.factory.BeanCurrentlyInCreationException
+      Requested bean is currently in creation: Is there an unresolvable circular reference?
+多个bean之间互相引用，形成一个闭环
+构造方法注入无法解决循环依赖（无限套娃），set注入可以解决循环依赖
+
+3. spring三级缓存解决循环依赖问题：
+单例bean才能进三级缓存，原型bean每次都会创建一个新的bean，无法复用，所以不能放进三级缓存
+
+一级缓存: singletonObjects (单例池，放已经初始化好的bean)
+    private final Map<String, Object> singletonObjects = new ConcurrentHashMap(256);
+
+二级缓存: earlySingletonObjects (早期暴露出来的bean对象，bean的生命周期还未结束，属性还在填充，已经实例化但未初始化)
+    private final Map<String, Object> earlySingletonObjects = new HashMap(16);
+
+三级缓存: singletonFactories (存放的是FactoryBean)
+    private final Map<String, ObjectFactory<?>> singletonFactories = new HashMap(16);
+
+bean的实例化：在内存中申请一块内存空间
+bean的初始化：完成属性的各种复制，属性填充
+
+singletonObjects -> earlySingletonObjects -> singletonFactories
+getSingleton -> doCreateBean -> populateBean -> addSingleton
+
+1.beanA创建的过程中需要beanB，于是beaA将自己放入三级缓存中，去实例化beanB
+2.beanB实例化的时候发现需要beanA，于是beanB先去查一级缓存，没有，再查二级缓存，还是没有，再查三级缓存，找到了beanA，
+  然后把三级缓存里面的beanA放到二级缓存中，并且删除三级缓存中的beanA
+3.beanB顺利初始化完成，将自己放到一级缓存中（此时beanB中的beanA依然是创建中的状态）
+  然后回来接着创建beanA，此时beanB已经创建结束，直接从一级缓存里面拿到beanB，然后完成创建，并且将beanA自己放到一级缓存中
+
+RootBeanDefinition

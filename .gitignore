@@ -1,0 +1,10 @@
+# Project exclude paths
+/java8_demo/target/
+/juc_demo/target/
+/jvm_demo/target/
+.idea
+mvnw
+mvnw.cmd
+.mvn
+target
+*.iml

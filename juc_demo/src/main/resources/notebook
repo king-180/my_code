@@ -1,0 +1,50 @@
+1.公平锁和非公平锁：(非公平锁吞吐量高)
+公平锁：多个线程按照申请锁的顺序去获得锁，线程会直接进入队列去排队，永远都是队列的第一位才能得到锁。
+    优点：所有的线程都能得到资源，不会饿死在队列中。
+    缺点：吞吐量会下降很多，队列里面除了第一个线程，其他的线程都会阻塞，cpu唤醒阻塞线程的开销会很大。
+非公平锁：多个线程去获取锁的时候，会直接去尝试获取，获取不到，再去进入等待队列，如果能获取到，就直接获取到锁。
+    优点：可以减少CPU唤醒线程的开销，整体的吞吐效率会高点，CPU也不必取唤醒所有线程，会减少唤起线程的数量。
+    缺点：你们可能也发现了，这样可能导致队列中间的线程一直获取不到锁或者长时间获取不到锁，导致饿死。
+2.可重入锁(递归锁)：同一个线程可以进入任何一个他已经拥有锁的所同步着的代码块。（同一个线程，同一把锁）
+    案例：ReentrantLock/Synchronized
+    优点：可以避免死锁。
+3.自旋锁：尝试获取锁的线程不会立即阻塞，而是采用循环的方式去尝试获取锁(CAS)
+    优点: 减少线程上下文切换的消耗
+    缺点：循环会消耗CPU资源
+4.独占锁(写)/共享锁(读)/互斥锁：
+    独占锁：锁对象一次只能被一个线程持有(ReentrantLock/Synchronized)
+    共享锁：锁对象一次能被多个线程持有
+5.读写锁：
+    写操作保证原子性，不可中断
+    读-读 共享
+    读-写 互斥
+    写-写 互斥
+6.ReentrantLock与Synchronized的区别：
+6.1Synchronized: JVM层面关键字
+    monitorenter(底层通过monitor对象来完成，其实wait/notify等方法也依赖于monitor对象，只有在同步方法中才能调用wait/notify方法)
+    monitorexit
+    不需要手动释放，同步代码块执行完自动释放锁
+    不可中断，除非抛异常或者正常运行完
+    非公平锁
+    随机唤醒一个线程，或者唤醒所有线程
+6.2ReentrantLock: 是具体的类，api层面的锁
+    需要用户手动释放锁，否则会出现死锁情况
+    可中断，可以用tryLock(long timeout, TimeUnit unit),或者lockInterruptibly()放代码块中，调用interrupt()方法可中断
+    默认非公平锁，也可以设置为公平锁
+    锁可以绑定多个condition条件变量，用来实现分组唤醒需要唤醒的线程们，可以精确唤醒
+7.线程等待唤醒机制：
+7.1 synchronized + wait + notify
+    必须配合synchronized使用，否则 java.lang.IllegalMonitorStateException
+    必须先调用wait()后调用notify()，否则会阻塞，无法唤醒
+7.2 reentrantLock + await + signal
+    必须配合reentrantLock使用，否则 java.lang.IllegalMonitorStateException
+    必须先调用await()后调用signal()，否则会阻塞，无法唤醒
+7.3 lockSupport + park + unpark
+    LockSupport 是用来创建锁的和其他同步类的基本线程阻塞原语的工具类，底层调用Unsafe中的native方法
+    LockSupport和每个使用他的线程都有一个许可证（permit）关联，默认是0，而且最多只有 1个许可证。
+    调用一次unpark方法就加1，调用一次park就减1，多次调用unpark不会积累许可证。
+    可以先调用unpark方法，后调用park方法。
+8. AQS AbstractQueuedSynchronizer
+    用来构建锁或者其他同步器组件的重量级基础框架及整个JUC体系的基石
+    通过内置的FIFO队列来完成资源获取线程的排队工作，并且通过一个被volatile修饰的int类型变量表示持有锁的状态
+    哨兵节点、头、尾、前、后指针
