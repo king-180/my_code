@@ -19,15 +19,15 @@
     读-读 共享
     读-写 互斥
     写-写 互斥
-6.ReentrantLock与Synchronized的区别：
-6.1Synchronized: JVM层面关键字
+6. ReentrantLock与Synchronized的区别：
+6.1 Synchronized: JVM层面关键字
     monitorenter(底层通过monitor对象来完成，其实wait/notify等方法也依赖于monitor对象，只有在同步方法中才能调用wait/notify方法)
     monitorexit
     不需要手动释放，同步代码块执行完自动释放锁
     不可中断，除非抛异常或者正常运行完
     非公平锁
     随机唤醒一个线程，或者唤醒所有线程
-6.2ReentrantLock: 是具体的类，api层面的锁
+6.2 ReentrantLock: 是具体的类，api层面的锁
     需要用户手动释放锁，否则会出现死锁情况
     可中断，可以用tryLock(long timeout, TimeUnit unit),或者lockInterruptibly()放代码块中，调用interrupt()方法可中断
     默认非公平锁，也可以设置为公平锁
@@ -71,3 +71,6 @@
 11. 总线风暴：
     由于volatile的mesi缓存一致性协议需要不断的从主内存嗅探和cas不断循环无效交互导致总线带宽达到峰值
     解决办法：部分volatile和cas使用synchronize
+12. volatile:（无原子性）
+   可见性
+   禁止指令重排
