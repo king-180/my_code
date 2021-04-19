@@ -44,7 +44,7 @@ public class SortDemo {
 
     public static List<Student> getStudents() throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        List<Student> students = Arrays.asList(
+        return Arrays.asList(
                 new Student(1, sdf.parse("2021-11-12"), "A"),
                 new Student(3, sdf.parse("2021-11-15"), "C"),
                 new Student(2, sdf.parse("2021-11-11"), "D"),
@@ -55,7 +55,6 @@ public class SortDemo {
                 new Student(8, sdf.parse("2021-11-14"), "H"),
                 new Student(7, sdf.parse("2021-11-11"), "I"),
                 new Student(0, sdf.parse("2021-11-12"), "J"));
-        return students;
     }
 }
 

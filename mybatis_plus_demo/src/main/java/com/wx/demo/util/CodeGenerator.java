@@ -59,7 +59,7 @@ public class CodeGenerator {
     /**
      * 文件名后缀
      */
-    private static String fileSuffix = ".java";
+    private static final String fileSuffix = ".java";
 
     /**
      * Init database information
@@ -126,7 +126,7 @@ public class CodeGenerator {
         // 包配置
         PackageConfig pc = new PackageConfig();
         pc.setParent(projectPackage.trim());
-//        pc.setModuleName("model名"); //自定义包名
+        pc.setModuleName("modelName"); //自定义包名
         pc.setMapper(setMapper.trim());
         pc.setEntity(setEntity.trim());
         pc.setService(setService.trim());

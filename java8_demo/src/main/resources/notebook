@@ -92,3 +92,27 @@ float ft = ((float)s / loadFactor) + 1.0F;
 
 红黑树平均查找长度为 log(n)
 链表平均查找长度为    n / 2
+
+2.Java反射：
+对于java.lang.Class类的理解：
+1.类的加载过程：
+    程序经过javac.exe命令以后，会生成一个或多个字节码文件（.class文件）。接着我们使用java.exe命令对某个字节码文件进行解释运行。
+相当于将某个字节码文件加载到内存中。此过程就称为类的加载。加载到内存中的类，我们就称为运行时类，此运行时类就作为Class的一个实例。
+2.Class的实例就对应着一个运行时类， 加载到内存中的运行时类会缓存一段时间。在此时间内，我们可以通过不同方式来获取此运行时类。
+3.获取Class实例的方法：
+方式一：通过运行时类的属性: .class
+方式二：通过运行时类的对象：getClass()
+方式三：调用Class类的静态方法：forName(String classPath)
+方式四：使用类的加载器：ClassLoader
+
+getFields: 只能获取public修饰的属性
+declaredFields ：可以获取所有属性   ----->   name.setAccessible(true);  保证对象属性可访问，否则会跑非法访问异常
+
+
+函数式接口：只有一个抽象方法的接口(不能出现第二个方法)
+
+消费性接口 Consumer<T>   void accept(T t)
+供给型接口 Supplier<T>   T get()
+函数型接口 Function<T,R> R apply(T t)
+断定型接口 Predicate<T>  boolean test(T t)
+
