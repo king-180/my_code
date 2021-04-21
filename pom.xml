@@ -26,6 +26,7 @@
         <module>poi_excel_demo</module>
         <module>data_struct_demo</module>
         <module>design_pattern_demo</module>
+        <module>springboot_demo</module>
     </modules>
 
     <dependencies>

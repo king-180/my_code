@@ -7,9 +7,7 @@ import com.wx.demo.validator.anno.group.UpdateGroup;
 import com.wx.demo.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,13 +27,27 @@ public class BookController {
         return new ResultVO<>(bookList);
     }
 
+    @RequestMapping("/book/add")
     public ResultVO<Void> add(@Validated(value = AddGroup.class) @RequestBody Book book) {
 
         return new ResultVO<>();
     }
 
+    @RequestMapping("/book/update")
     public ResultVO<Void> update(@Validated(value = UpdateGroup.class) @RequestBody Book book) {
 
+        return new ResultVO<>();
+    }
+
+    @RequestMapping("/book/delete/{id}")
+    public ResultVO<Void> delete(@PathVariable("id") Integer id) {
+        boolean res = bookService.deleteById(id);
+        return new ResultVO<>();
+    }
+
+    @RequestMapping("/book/delete")
+    public ResultVO<Void> delete2(@RequestParam("id") Integer id) {
+        boolean res = bookService.deleteById(id);
         return new ResultVO<>();
     }
 

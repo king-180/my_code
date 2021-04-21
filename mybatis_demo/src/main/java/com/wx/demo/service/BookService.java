@@ -11,4 +11,6 @@ import java.util.List;
 public interface BookService {
 
     List<Book> list(Book book);
+
+    boolean deleteById(Integer id);
 }

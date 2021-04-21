@@ -9,6 +9,11 @@
         <result column="detail" property="detail" jdbcType="STRING"/>
         <result column="mainType" property="mainType" jdbcType="STRING"/>
     </resultMap>
+    <delete id="deleteById">
+        delete
+        from book
+        where id = #{id}
+    </delete>
 
     <select id="list" resultMap="baseResultMap" parameterType="com.wx.demo.entity.Book">
         select *
