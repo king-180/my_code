@@ -6,6 +6,7 @@ import com.wx.demo.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,5 +28,12 @@ public class BookServiceImpl implements BookService {
     @Override
     public boolean deleteById(Integer id) {
         return bookDao.deleteById(id);
+    }
+
+    @Override
+    public void add(Book book) {
+        book.setPubDate(new Date());
+        book.setBdate(new Date());
+        bookDao.add(book);
     }
 }

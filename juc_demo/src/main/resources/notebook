@@ -74,3 +74,60 @@
 12. volatile:（无原子性）
    可见性
    禁止指令重排
+
+13. 线程中断和虚假唤醒：
+像在一个参数版本中，中断和虚假唤醒是可能的，并且该方法应该始终在循环中使用：
+  synchronized (obj) {
+         while (<condition does not hold>)
+             obj.wait();
+         ... // Perform action appropriate to condition
+     }
+该方法只能由作为该对象的监视器的所有者的线程调用。 有关线程可以成为监视器所有者的方式的说明，请参阅notify方法。
+
+多线程交互中的判断只用while不能用if判断 ---> 避免线程中断和虚假唤醒（两个线程只能无影响）
+
+14. 阻塞队列：
+    ArrayBlockingQueue: 由数组构成的有界阻塞队列
+    LinkedBlockingQueue：由链表组成的有界（默认界限为Integer.MAX_VALUE）阻塞队列
+    SynchronousQueue: 不存储元素的阻塞队列，也即单个元素的队列
+
+15. 线程池：
+
+// 1 池 5工作线程
+ExecutorService service1 = Executors.newFixedThreadPool(5);
+// 1 池 1 工作线程
+ExecutorService service2 = Executors.newSingleThreadExecutor();
+// 1 池 N 工作线程
+ExecutorService service3 = Executors.newCachedThreadPool();
+
+
+
+！阿里巴巴Java开发手册明确指定不允许用 Executors创建线程池，而是通过 new ThreadPoolExecutor()的方式，避免资源耗尽的风险。！
+
+
+
+ThreadPoolExecutor(int corePoolSize,
+                  int maximumPoolSize,
+                  long keepAliveTime,
+                  TimeUnit unit,
+                  BlockingQueue<Runnable> workQueue,
+                  ThreadFactory threadFactory,
+                  RejectedExecutionHandler handler)
+
+corePoolSize: 线程池中核心线程数
+maximumPoolSize: 线程池中最大线程数
+keepAliveTime: 多余空闲线程（非核心线程）空闲时间超过 keepAliveTime 就会被销毁，只保留核心线程
+unit: 时间单位
+workQueue: 任务队列，存放被提交但是还未执行的线程
+threadFactory: 创建线程的工厂
+handler: 拒绝策略，当队列满了，并且并且工作线程数大于 maximumPoolSize 时，拒绝请求执行线程的策略
+
+线程池执行流程：
+1）核心线程数有空闲：分配任务，否则进任务队列，任务队列满，开启救急线程，救急线程不够用（线程池满，达到maximumPoolSize），执行拒绝策略。
+救急线程空闲，空闲时间超过 keepAliveTime 就会被销毁，只保留核心线程
+
+四大拒绝策略：
+AbortPolicy(默认)：直接抛出RejectedExecutionException异常
+CallerRunsPolicy: 将任务回退给调用者线程，在main线程中提交给线程池就回退交给main线程来执行
+DiscardPolicy: 直接抛弃新来的任务
+DiscardOldestPolicy: 直接抛弃队列中最早来的任务

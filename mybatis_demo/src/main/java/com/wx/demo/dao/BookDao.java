@@ -15,4 +15,6 @@ public interface BookDao {
     List<Book> list(Integer id);
 
     boolean deleteById(Integer id);
+
+    void add(Book book);
 }

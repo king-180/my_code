@@ -26,6 +26,7 @@ public class Book implements Serializable {
 
     private String isbn;
 
+    @NotBlank(message = "新增或者更新描述不能为空")
     private String detail;
 
     private Float oriPrice;

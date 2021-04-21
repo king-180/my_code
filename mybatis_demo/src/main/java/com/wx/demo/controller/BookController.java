@@ -29,7 +29,7 @@ public class BookController {
 
     @RequestMapping("/book/add")
     public ResultVO<Void> add(@Validated(value = AddGroup.class) @RequestBody Book book) {
-
+        bookService.add(book);
         return new ResultVO<>();
     }
 

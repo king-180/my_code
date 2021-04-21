@@ -8,7 +8,7 @@ import java.util.concurrent.*;
  * 默认的拒绝策略为 AbortPolicy 执行会直接抛异常
  * 当救急线程没有任务并且超过 keepAliveTime 就会被回收
  */
-public class MyThreadPoolDemo {
+public class ThreadPoolDemo {
     public static void main(String[] args) {
         ExecutorService service = new ThreadPoolExecutor(
                 2,

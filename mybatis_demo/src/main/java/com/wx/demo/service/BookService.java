@@ -13,4 +13,6 @@ public interface BookService {
     List<Book> list(Book book);
 
     boolean deleteById(Integer id);
+
+    void add(Book book);
 }

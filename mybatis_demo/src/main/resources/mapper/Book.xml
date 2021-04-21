@@ -9,6 +9,9 @@
         <result column="detail" property="detail" jdbcType="STRING"/>
         <result column="mainType" property="mainType" jdbcType="STRING"/>
     </resultMap>
+    <insert id="add">
+
+    </insert>
     <delete id="deleteById">
         delete
         from book
