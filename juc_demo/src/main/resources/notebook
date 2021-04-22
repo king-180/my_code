@@ -101,9 +101,11 @@ ExecutorService service2 = Executors.newSingleThreadExecutor();
 ExecutorService service3 = Executors.newCachedThreadPool();
 
 
-
-！阿里巴巴Java开发手册明确指定不允许用 Executors创建线程池，而是通过 new ThreadPoolExecutor()的方式，避免资源耗尽的风险。！
-
+######################################################################################################################
+##                                                                                                                  ##
+## 阿里巴巴Java开发手册明确指定不允许用 Executors创建线程池，而是通过 new ThreadPoolExecutor()的方式，避免资源耗尽的风险。 ##
+##                                                                                                                  ##
+######################################################################################################################
 
 
 ThreadPoolExecutor(int corePoolSize,
@@ -125,6 +127,14 @@ handler: 拒绝策略，当队列满了，并且并且工作线程数大于 maxi
 线程池执行流程：
 1）核心线程数有空闲：分配任务，否则进任务队列，任务队列满，开启救急线程，救急线程不够用（线程池满，达到maximumPoolSize），执行拒绝策略。
 救急线程空闲，空闲时间超过 keepAliveTime 就会被销毁，只保留核心线程
+
+1、线程池创建，准备好 corePoolSize 数量的核心线程，准备接受任务
+2、向线程池提交任务，用 空闲的核心线程 执行
+    1）核心线程 满了，就将新提交的任务放到 阻塞队列中。空闲的 核心线程 就会自己去阻塞队列获取任务执行
+    2）阻塞队列满了，就直接开启救急线程来执行任务，最大只能开到 maximumPoolSize
+    3）核心线程、救急线程 都执行好了，空闲下来的救急线程 会在 keepAliveTime 时间后 自动销毁，最终只留下 核心线程。
+    4）如果达到了 maximumPoolSize 并且也达到 workQueue 最大容量，就执行 拒绝策略 handler
+
 
 四大拒绝策略：
 AbortPolicy(默认)：直接抛出RejectedExecutionException异常
