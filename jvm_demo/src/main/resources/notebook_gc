@@ -1,0 +1,31 @@
+查看当前运行程序的jvm配置参数:
+    1)jps   列出当前所有的Java进程id
+    2)jinfo -flag [MetaspaceSize] [java进程id] 查看具体参数
+
+-Xms100m   -XX:InitialHeapSize=100m
+-Xmx100m   -XX:MaxHeapSize=100m
+-Xss1024k  -XX:ThreadStackSize=1024k    用jinfo查看参数的时候发现Windows操作系统中-XX:ThreadStackSize=0 代表用的是系统默认值
+-Xmn100m   设置年轻代大小
+-XX:SurvivorRatio=8   设置幸存者区占比  8:1:1
+-XX:NewRatio=2        设置老年代占比    2:1
+-XX:MaxTenuringThreshold=15     设置垃圾最大年龄
+
+-XX:MetaspaceSize=1024m
+-XX:+PrintGCDetails
+
+查看jvm所有参数初始化默认值：
+java -XX:+PrintFlagsInitial
+查看jvm所有参数修改后的值：
+java -XX:+PrintFlagsGFinal -version     修改过的参数值会变成  :=
+
+4大垃圾回收算法：
+引用计数法
+复制算法
+标记清除算法
+标记压缩算法
+
+4种主要垃圾回收器：
+Serial并行垃圾回收器       单个垃圾回收线程，用户线程暂停时间长，STW      -XX:+UseSerialGC
+Parallel串行垃圾回收器     多个垃圾回收线程，用户线程暂停时间稍微变短，STW       -XX:+UseParallelGC   jdk8默认
+CMS并发垃圾回收器          用户线程和垃圾回收线程同时交替执行，不需要暂停用户线程，适用于互联网公司        -XX:+UseConcMarkSweepGC
+G1分代垃圾回收器           不同区用不同垃圾回收算法        -XX:UseG1GC

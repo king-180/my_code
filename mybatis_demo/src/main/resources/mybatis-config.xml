@@ -11,4 +11,8 @@
         <!-- 使用驼峰命名法转换字段。 -->
         <setting name="mapUnderscoreToCamelCase" value="true" />
     </settings>
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+        </plugin>
+    </plugins>
 </configuration>

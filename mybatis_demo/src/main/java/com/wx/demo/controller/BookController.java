@@ -1,10 +1,13 @@
 package com.wx.demo.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.wx.demo.entity.Book;
+import com.wx.demo.query.BookQuery;
 import com.wx.demo.service.BookService;
 import com.wx.demo.validator.anno.group.AddGroup;
 import com.wx.demo.validator.anno.group.UpdateGroup;
 import com.wx.demo.vo.ResultVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +26,15 @@ public class BookController {
 
     @RequestMapping("/book/list")
     public ResultVO<List<Book>> list(@RequestBody Book book) {
+        List<Book> bookList = bookService.list(book);
+        return new ResultVO<>(bookList);
+    }
+
+    @RequestMapping("/book/list2")
+    public ResultVO<List<Book>> list2(@RequestBody BookQuery query) {
+        PageHelper.startPage(query.getPageNo(), query.getPageSize());
+        Book book = new Book();
+        BeanUtils.copyProperties(query, book);
         List<Book> bookList = bookService.list(book);
         return new ResultVO<>(bookList);
     }
