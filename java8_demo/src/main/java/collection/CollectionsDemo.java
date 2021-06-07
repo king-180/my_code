@@ -1,6 +1,7 @@
 package collection;
 
 import java.util.Collections;
+import java.util.List;
 
 /**
  * @author wangxing
@@ -11,5 +12,11 @@ public class CollectionsDemo {
         System.out.println(Collections.emptyList());
         System.out.println(Collections.emptyMap());
         System.out.println(Collections.emptySet());
+
+        List<Integer> list = null;
+        for (Integer e : list) {
+            System.out.println(e);
+        }
+
     }
 }
