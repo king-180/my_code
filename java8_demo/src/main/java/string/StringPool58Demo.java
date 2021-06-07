@@ -27,5 +27,9 @@ public class StringPool58Demo {
 
         String s3 = new String("java");
         System.out.println(s3 == s3.intern()); // false
+
+        String s4 = "alibaba";
+        String s5 = new String("alibaba").intern();
+        System.out.println(s4 == s5); // true
     }
 }
