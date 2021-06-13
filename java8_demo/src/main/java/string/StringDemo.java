@@ -21,5 +21,10 @@ public class StringDemo {
         System.out.println("1,2,3".replaceAll(",", ""));
         System.out.println("1,2,3".replace(",", ""));
 
+        String format = String.format("how are you, " + "%s:%s", "hello", "world");
+        System.out.println(format);
+
+        System.out.println("1,2.3;4/5".replaceAll("[,.;/]", ""));
+
     }
 }
