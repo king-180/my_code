@@ -1,0 +1,16 @@
+LongAdder 原理：
+
+transient volatile Cell[] cells;
+transient volatile long base;
+transient volatile int cellsBusy; 锁状态标识位（0未加锁，1加锁）
+
+LongAdder 性能比 AtomicLong 性能更优越:
+LongAdder 在有竞争的情况下，设置多个累加单元，线程1累加Cell[0],线程2累加Cell[1]...最后将结果汇总起来。
+这样它们在累加的时候操作的不同的Cell变量，因此减少了CAS重试失败次数，从而提高了性能。
+
+@sun.misc.Contended
+static final class Cell {...}
+
+@sun.misc.Contended 注解：
+防止缓存行伪共享，在Cell对象前后各增加128字节大小的padding，从而让CPU将对象预读至缓存时占用不同的缓存行，这样就不会造成对方缓存行失效
+每个缓存行一般占64个字节，一个Cell对象占24个字节：对象头占16字节 + long类型的value属性占8个字节

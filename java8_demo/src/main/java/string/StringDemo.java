@@ -26,5 +26,7 @@ public class StringDemo {
 
         System.out.println("1,2.3;4/5".replaceAll("[,.;/]", ""));
 
+        System.out.println("a...bcdef".substring(0, 3));
+
     }
 }
