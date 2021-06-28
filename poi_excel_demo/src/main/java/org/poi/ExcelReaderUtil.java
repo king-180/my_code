@@ -78,7 +78,7 @@ public class ExcelReaderUtil {
 	public static void main(String[] args) throws Exception {
 		//String path="D:\\Github\\test.xls";
 		//String path="D:\\H3CIDEA\\POIExcel\\test.xlsx";
-		String path="D:\\Github\\POIExcel\\test.xlsx";
+		String path="D:\\downDD\\电站运营方\\charging_电站数据_20210628.xlsx";
 
 		/*ExcelReaderUtil.readExcel(file2.getAbsolutePath(),"/home/test/tmp.xlsx");*/
 		ExcelReaderUtil.readExcel(path);
