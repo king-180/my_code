@@ -1,7 +1,6 @@
 package com.wx.demo.config;
 
 import com.wx.demo.interceptor.MyCartInterceptor;
-import com.wx.demo.interceptor.MyLoginInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
