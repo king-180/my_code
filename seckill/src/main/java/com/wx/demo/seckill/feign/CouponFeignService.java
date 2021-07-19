@@ -1,6 +1,10 @@
 package com.wx.demo.seckill.feign;
 
+import com.wx.demo.seckill.vo.SeckillSkuInfoVO;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /**
  * @author wangxing
@@ -9,5 +13,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient("gulimall-coupon")
 public interface CouponFeignService {
 
+    @RequestMapping("/seckill")
+    List<SeckillSkuInfoVO> getSeckillSkuInfo();
 
 }
