@@ -1,0 +1,11 @@
+1.手机短信验证码防刷
+
+2.Spring Session 原理：
+@EnableRedisHttpSession导入RedisHttpSessionConfiguration.class配置：
+    1）给容器添加了一个组件：
+        SessionRepository ----> RedisOperationsSessionRepository: redis 操作 session ，session的增删改查封装类
+    2）SessionRepositoryFilter: session存储过滤器，每个请求都必须经过filter
+        a.创建的时候，就自动从容器中获得了 SessionRepository
+        b.原始的request、response被包装。（装饰者模式）SessionRepositoryRequestWrapper,SessionRepositoryResponseWrapper
+        c.获取session从SessionRepository中获取，wrapperRequest.getSession()
+    3）redis 中的 session 自动延期

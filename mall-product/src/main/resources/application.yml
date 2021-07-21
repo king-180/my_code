@@ -1,0 +1,9 @@
+#spring:
+#  thymeleaf:
+#    cache: false
+#  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://192.168.0.175/seckill?
+#    username: root
+#    password: 123456
+

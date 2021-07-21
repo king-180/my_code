@@ -28,7 +28,15 @@
         <module>design_pattern_demo</module>
         <module>springboot_demo</module>
         <module>kafka_demo</module>
-        <module>seckill</module>
+        <module>sso-client</module>
+        <module>sso-server</module>
+        <module>mall-seckill</module>
+        <module>mall-auth</module>
+        <module>mall-cart</module>
+        <module>mall-product</module>
+        <module>mall-ware</module>
+        <module>mall-member</module>
+        <module>mall-order</module>
     </modules>
 
     <dependencies>
