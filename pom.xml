@@ -37,6 +37,7 @@
         <module>mall-ware</module>
         <module>mall-member</module>
         <module>mall-order</module>
+        <module>mall-pay</module>
     </modules>
 
     <dependencies>
