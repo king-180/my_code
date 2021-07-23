@@ -10,6 +10,8 @@ import java.math.BigDecimal;
  * @date 2021/7/23 18:54
  */
 public class AlipayManager extends BaseThirdPayManager {
+
+
     public AlipayManager(String paymentAppId, Integer payPlatform) {
         super(paymentAppId, payPlatform);
     }
