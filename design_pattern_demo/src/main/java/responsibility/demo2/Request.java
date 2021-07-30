@@ -10,18 +10,18 @@ public class Request {
     private String reason;
     private Integer days;
     private String customInfo;
-    private String groupLeaderInfo;
-    private String managerInfo;
-    private String departmentHeaderInfo;
+    private String groupLeaderMsg;
+    private String managerMsg;
+    private String departmentHeaderMsg;
 
     public Request(Builder builder) {
         this.name = builder.name;
         this.reason = builder.reason;
         this.days = builder.days;
         this.customInfo = builder.customInfo;
-        this.groupLeaderInfo = builder.groupLeaderInfo;
-        this.managerInfo = builder.managerInfo;
-        this.departmentHeaderInfo = builder.departmentHeaderInfo;
+        this.groupLeaderMsg = builder.groupLeaderMsg;
+        this.managerMsg = builder.managerMsg;
+        this.departmentHeaderMsg = builder.departmentHeaderMsg;
     }
 
     public String getName() {
@@ -40,16 +40,16 @@ public class Request {
         return customInfo;
     }
 
-    public String getGroupLeaderInfo() {
-        return groupLeaderInfo;
+    public String getGroupLeaderMsg() {
+        return groupLeaderMsg;
     }
 
-    public String getManagerInfo() {
-        return managerInfo;
+    public String getManagerMsg() {
+        return managerMsg;
     }
 
-    public String getDepartmentHeaderInfo() {
-        return departmentHeaderInfo;
+    public String getDepartmentHeaderMsg() {
+        return departmentHeaderMsg;
     }
 
     public static class Builder {
@@ -57,9 +57,9 @@ public class Request {
         private String reason;
         private Integer days;
         private String customInfo;
-        private String groupLeaderInfo;
-        private String managerInfo;
-        private String departmentHeaderInfo;
+        private String groupLeaderMsg;
+        private String managerMsg;
+        private String departmentHeaderMsg;
 
         public Builder() {
         }
@@ -84,18 +84,18 @@ public class Request {
             return this;
         }
 
-        public Builder setGroupLeaderInfo(String groupLeaderInfo) {
-            this.groupLeaderInfo = groupLeaderInfo;
+        public Builder setGroupLeaderMsg(String groupLeaderMsg) {
+            this.groupLeaderMsg = groupLeaderMsg;
             return this;
         }
 
-        public Builder setManagerInfo(String managerInfo) {
-            this.managerInfo = managerInfo;
+        public Builder setManagerMsg(String managerMsg) {
+            this.managerMsg = managerMsg;
             return this;
         }
 
-        public Builder setDepartmentHeaderInfo(String departmentHeaderInfo) {
-            this.departmentHeaderInfo = departmentHeaderInfo;
+        public Builder setDepartmentHeaderMsg(String departmentHeaderMsg) {
+            this.departmentHeaderMsg = departmentHeaderMsg;
             return this;
         }
 
@@ -104,14 +104,14 @@ public class Request {
             this.days = request.days;
             this.reason = request.reason;
 
-            if (request.getGroupLeaderInfo() != null && !request.getGroupLeaderInfo().equals("")) {
-                this.groupLeaderInfo = request.getGroupLeaderInfo();
+            if (request.getGroupLeaderMsg() != null && !request.getGroupLeaderMsg().equals("")) {
+                this.groupLeaderMsg = request.getGroupLeaderMsg();
             }
-            if (request.getManagerInfo() != null && !request.getManagerInfo().equals("")) {
-                this.managerInfo = request.getManagerInfo();
+            if (request.getManagerMsg() != null && !request.getManagerMsg().equals("")) {
+                this.managerMsg = request.getManagerMsg();
             }
-            if (request.getDepartmentHeaderInfo() != null && !request.getDepartmentHeaderInfo().equals("")) {
-                this.departmentHeaderInfo = request.getDepartmentHeaderInfo();
+            if (request.getDepartmentHeaderMsg() != null && !request.getDepartmentHeaderMsg().equals("")) {
+                this.departmentHeaderMsg = request.getDepartmentHeaderMsg();
             }
             if (request.getCustomInfo() != null && !request.getCustomInfo().equals("")) {
                 this.customInfo = request.getCustomInfo();
@@ -133,9 +133,9 @@ public class Request {
                 ", reason='" + reason + '\'' +
                 ", days=" + days +
                 ", customInfo='" + customInfo + '\'' +
-                ", groupLeaderInfo='" + groupLeaderInfo + '\'' +
-                ", managerInfo='" + managerInfo + '\'' +
-                ", departmentHeaderInfo='" + departmentHeaderInfo + '\'' +
+                ", groupLeaderMsg='" + groupLeaderMsg + '\'' +
+                ", managerMsg='" + managerMsg + '\'' +
+                ", departmentHeaderMsg='" + departmentHeaderMsg + '\'' +
                 '}';
     }
 }

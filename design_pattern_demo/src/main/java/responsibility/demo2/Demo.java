@@ -10,12 +10,12 @@ import java.util.List;
 public class Demo {
     public static void main(String[] args) {
         ChainOfResponsibilityClient client = new ChainOfResponsibilityClient();
+        client.addRatify(new CustomInterceptor());
         Request request = new Request.Builder()
                 .setName("张三")
-                .setDays(5)
+                .setDays(8)
                 .setReason("事假")
                 .build();
-
         Result result = client.execute(request);
         System.out.println("请假结果：" + result);
 

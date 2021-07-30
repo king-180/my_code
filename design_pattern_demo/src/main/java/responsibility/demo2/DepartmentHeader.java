@@ -8,10 +8,10 @@ public class DepartmentHeader implements Ratify {
     @Override
     public Result deal(Chain chain) {
         Request request = chain.request();
-        System.out.println("DepartmentHeader 收到请求申请 --> request: " + request);
+        System.out.println(getClass().getName() + "DepartmentHeader 收到请求申请 --> request: " + request);
         if (request.getDays() > 7) {
             return new Result(false, "请假超过 7 天");
         }
-        return new Result(true, "DepartmentHeader：不要着急，把事情处理完再回来！");
+        return new Result(true, getClass().getName() + "：不要着急，把事情处理完再回来！");
     }
 }
