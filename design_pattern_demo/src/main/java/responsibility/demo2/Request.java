@@ -100,9 +100,9 @@ public class Request {
         }
 
         public Builder newRequest(Request request) {
-            this.name = name;
-            this.days = days;
-            this.reason = reason;
+            this.name = request.name;
+            this.days = request.days;
+            this.reason = request.reason;
 
             if (request.getGroupLeaderInfo() != null && !request.getGroupLeaderInfo().equals("")) {
                 this.groupLeaderInfo = request.getGroupLeaderInfo();
