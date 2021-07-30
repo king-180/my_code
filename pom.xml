@@ -33,9 +33,6 @@
         <module>mall-seckill</module>
         <module>mall-auth</module>
         <module>mall-cart</module>
-        <module>mall-product</module>
-        <module>mall-ware</module>
-        <module>mall-member</module>
         <module>mall-order</module>
         <module>mall-pay</module>
     </modules>
